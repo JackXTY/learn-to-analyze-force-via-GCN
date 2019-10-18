@@ -1,0 +1,10 @@
+    TINT_COLOR = (0, 0, 0)
+    image = Image.open(pngpath)
+    image = image.convert("RGBA")
+    tmp = Image.new('RGBA', image.size, TINT_COLOR+(0,))
+    draw = ImageDraw.Draw(tmp)
+    draw.polygon(((680,140),(665,330),(750,350),(775,180)), fill=TINT_COLOR+(127,))#topleft bottom left bottom right top right
+    image = Image.alpha_composite(image, tmp)
+    image = image.convert("RGB")
+    circle='C:\\Users\\Asus\\Desktop\\save\\predict\\testcircle'+str(i)+'.png'
+    image.save(circle)
