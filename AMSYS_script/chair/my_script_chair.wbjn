@@ -1,0 +1,29 @@
+# encoding: utf-8
+# Release 19.1
+
+SetScriptVersion(Version="19.4.159")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit()
+script = open('D:/XiaoTianyi/Real/Model2_chair/create_model_chair.js', 'r') 
+geometry1.SendCommand( Command=script.read())
+script.close()
+geometry1.Exit()
+
+Save(FilePath="D:/XiaoTianyi/Real/Model2_chair/pro/9_8_2019.wbpj",Overwrite=True)
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+solution1 = system1.GetContainer(ComponentName="Solution")
+solution1.Edit()
+model1.SendCommand(Command="WB.AppletList.Applet(\"DSApplet\").App.Script.doToolsRunMacro(\"D:/XiaoTianyi/Real/Model2_chair/auto_chair.js\")")
+model1.Exit()
+Save(FilePath="D:/XiaoTianyi/Real/Model2_chair/pro/9_8_2019.wbpj",Overwrite=True)
+
+
+
+
